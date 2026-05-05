@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>KIM ZAYN 𝗦𝗨𝗣𝗥𝗘𝗠𝗘</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        
+        :root { --neon: #00f2ff; --danger: #ff003c; --gold: #ffea00; --bg-dark: #000; }
+
+        body {
+            background-color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        /* --- SPLASH SCREEN LOGIC --- */
+        #splashScreen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+        .splash-logo {
+            font-size: 40px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.95); }
+        }
+        .loader-bar {
+            width: 150px;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .loader-progress {
+            position: absolute;
+            height: 100%;
+            background: var(--neon);
+            width: 40%;
+            animation: load 2s infinite ease-in-out;
+        }
+        @keyframes load {
+            0% { left: -40%; }
+            100% { left: 100%; }
+        }
+        .hidden { display: none !important; }
+        .fade-out { opacity: 0; transition: 0.8s ease; pointer-events: none; }
+
+        /* --- MAIN TOOL CARD --- */
+        .tool-card {
+            width: 100%;
+            height: 100%;
+            max-width: 500px;
+            background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            text-align: center;
+            color: white;
+        }
+
+        .header {
+            color: var(--neon);
+            font-size: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+        }
+
+        .mode-tabs {
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 0;
+            font-size: 11px;
+            background: #111;
+            border: 1px solid #333;
+            color: #666;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s ease;
+        }
+
+        .tab.active {
+            border-color: var(--neon);
+            color: var(--neon);
+            background: rgba(0, 242, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+        }
+
+        .display-box {
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 30px;
+            padding: 35px 10px;
+            background: radial-gradient(circle, rgba(0,242,255,0.08) 0%, rgba(0,0,0,0) 80%);
+        }
+
+        .label { font-size: 10px; color: var(--neon); margin-bottom: 15px; display: block; letter-spacing: 3px; opacity: 0.7; }
+
+        #prediction-text {
+            font-size: 55px;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+            min-height: 70px;
+            color: #fff;
+        }
+
+        .opposite-box {
+            color: var(--gold);
+            font-size: 13px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .info-row { font-size: 14px; margin-top: 20px; }
+
+        .period-val {
+            color: var(--gold);
+            background: #0a0a0a;
+            padding: 5px 12px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            font-family: 'Courier New', monospace;
+        }
+
+        .history-table {
+            width: 100%;
+            margin-top: 15px;
+            font-size: 11px;
+            border-collapse: collapse;
+            height: 140px;
+            overflow-y: auto;
+            display: block;
+        }
+
+        th { color: #555; padding: 8px; border-bottom: 1px solid #222; text-transform: uppercase; width: 25%; }
+        td { padding: 8px; border-bottom: 1px solid #111; text-align: center; width: 25%; }
+        .win { color: #00ff41; font-weight: bold; }
+        .loss { color: var(--danger); font-weight: bold; }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 18px;
+            border: none;
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+            background: linear-gradient(180deg, #009dff 0%, #004fb1 100%);
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .footer { font-size: 9px; color: #333; letter-spacing: 4px; font-weight: bold; }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+<!-- NEW LOADING PAGE -->
+<div id="splashScreen">
+    <div class="splash-logo">KIM ZAYN</div>
+    <div style="font-size: 10px; letter-spacing: 4px; color: var(--neon); margin-top: 10px; text-transform: uppercase;">Supreme Engine V15</div>
+    <div class="loader-bar"><div class="loader-progress"></div></div>
+</div>
+
+<div class="tool-card">
+    <div class="header">KIM ZAYN SUPREME</div>
+
+    <div class="mode-tabs">
+        <div class="tab" onclick="setMode('30S', 0.5, this)">30S</div>
+        <div class="tab active" onclick="setMode('1M', 1, this)">1M</div>
+        <div class="tab" onclick="setMode('3M', 3, this)">3M</div>
+        <div class="tab" onclick="setMode('5M', 5, this)">5M</div>
+    </div>
+
+    <div class="display-box">
+        <span class="label" id="mode-label">LIVE DATA (1M)</span>
+        <div id="prediction-text">ANALYZING</div>
+        <div class="opposite-box" id="pOpps">WAITING...</div>
+        
+        <div class="info-row">
+            <span class="period-val" id="pID">PERIOD: ----------</span>
+        </div>
+    </div>
+
+    <table class="history-table">
+        <thead>
+            <tr><th>PRD</th><th>PRED</th><th>NUM</th><th>STATUS</th></tr>
+        </thead>
+        <tbody id="logs"></tbody>
+    </table>
+
+    <div class="btn-container">
+        <button class="btn" onclick="window.open('https://t.me/+PqU1GT1t3-Y1Mzc1')">JOIN TELEGRAM CHANNEL</button>
+        <div class="footer" style="margin-top:10px;">KIM ZAYN MODE V15</div>
+    </div>
+</div>
+
+<script>
+    // Splash Screen Handler
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            document.getElementById('splashScreen').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('splashScreen').classList.add('hidden');
+            }, 800);
+        }, 3000);
+    });
+
+    let currentApiMode = 'WinGo_1M';
+    let lastId = "";
+    let savedPrediction = "";
+    let savedOpps = [];
+    const B_POOL = [5,6,7,8,9], S_POOL = [0,1,2,3,4];
+
+    function setMode(name, minutes, element) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        element.classList.add('active');
+        
+        const modeMap = { 
+            '30S': 'WinGo_30S', 
+            '1M': 'WinGo_1M', 
+            '3M': 'WinGo_3M', 
+            '5M': 'WinGo_5M' 
+        };
+        
+        currentApiMode = modeMap[name];
+        document.getElementById('mode-label').innerText = `LIVE DATA (${name})`;
+        
+        lastId = "";
+        document.getElementById('logs').innerHTML = "";
+        document.getElementById('prediction-text').innerText = "REFRESHING...";
+        runLogic();
+    }
+
+    async function runLogic() {
+        try {
+            const res = await fetch(`https://draw.ar-lottery01.com/WinGo/${currentApiMode}/GetHistoryIssuePage.json?t=${Date.now()}`);
+            const json = await res.json();
+            
+            if(!json.data || !json.data.list || json.data.list.length === 0) return;
+
+            const latest = json.data.list[0];
+            const last5 = json.data.list.slice(0, 5).map(x => parseInt(x.number) >= 5 ? "BIG" : "SMALL");
+            const nextPred = last5.filter(x => x === "BIG").length > 2 ? "BIG" : "SMALL";
+
+            if(lastId !== latest.issueNumber) {
+                const actualNum = parseInt(latest.number);
+                const actualSize = actualNum >= 5 ? "BIG" : "SMALL";
+                
+                if(lastId) {
+                    const isWin = (savedPrediction === actualSize) || savedOpps.includes(actualNum);
+                    const statusText = isWin ? 'WIN' : 'LOSS';
+                    const statusClass = isWin ? 'win' : 'loss';
+                    
+                    const row = `<tr>
+                        <td>${latest.issueNumber.slice(-4)}</td>
+                        <td>${savedPrediction}</td>
+                        <td>${actualNum}</td>
+                        <td class="${statusClass}">${statusText}</td>
+                    </tr>`;
+                    
+                    const logs = document.getElementById('logs');
+                    logs.innerHTML = row + logs.innerHTML;
+                    if(logs.children.length > 5) logs.removeChild(logs.lastChild);
+                }
+
+                lastId = latest.issueNumber;
+                savedPrediction = nextPred;
+                
+                const pool = nextPred === "BIG" ? S_POOL : B_POOL;
+                savedOpps = pool.sort(() => 0.5 - Math.random()).slice(0, 2);
+                
+                if (navigator.vibrate) navigator.vibrate(100);
+            }
+
+            document.getElementById('pID').innerText = "PERIOD: " + (BigInt(latest.issueNumber) + 1n).toString();
+            document.getElementById('prediction-text').innerText = nextPred;
+            document.getElementById('pOpps').innerText = "OPPOSITE: " + savedOpps.join(", ");
+
+        } catch(e) {
+            console.error("API Error:", e);
+        }
+    }
+
+    setInterval(runLogic, 1500);
+    runLogic();
+</script>
+</body>
+</html>
