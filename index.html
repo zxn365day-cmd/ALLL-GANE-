@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,16 +56,18 @@ font-size:16px;font-weight:900;cursor:pointer
 display:block;margin:20px 0;padding:16px;border:2px solid #0088cc;
 border-radius:18px;color:white;text-decoration:none;background:#0088cc22
 }
-.prediction{margin:25px 0;padding:20px;background:#0005;border:1px solid #00ff8840;border-radius:20px}
+.prediction{
+margin:25px 0;padding:20px;background:#0005;
+border:1px solid #00ff8840;border-radius:20px
+}
 .pred-title{font-size:13px;color:#999;letter-spacing:2px}
 .pred-value{font-size:60px;font-weight:900;margin:12px 0}
 #numberTips{color:#00ff88;font-weight:bold;letter-spacing:2px}
-.investment{margin-top:15px;padding:12px;background:#ffea0015;color:#ffea00;border-radius:10px}
 table{width:100%;margin-top:25px;border-collapse:collapse;font-size:12px}
 th,td{padding:12px 4px;border-bottom:1px solid #ffffff15}
 th{color:#888}
-.win{color:#00ff88}.loss{color:#ff3366}
-.small-note{font-size:11px;color:#aaa;line-height:1.5;margin-top:15px}
+.win{color:#00ff88}
+.loss{color:#ff3366}
 .back{margin-top:20px}
 </style>
 </head>
@@ -143,7 +144,8 @@ Connect to the WinGo history feed.
 ACTIVATE ENGINE
 </button>
 
-<a class="tg" href="https://t.me/+05qvEdy_Vn8xZGJl"
+<a class="tg"
+href="https://t.me/+05qvEdy_Vn8xZGJl"
 target="_blank" rel="noopener noreferrer">
 TELEGRAM VIP — JOIN CHANNEL
 </a>
@@ -161,26 +163,25 @@ WAITING FOR DATA...
 </div>
 
 <div class="prediction">
-<div class="pred-title">PATTERN ESTIMATE</div>
+<div class="pred-title">✅MAINTAIN 4-6 LEVEL✅</div>
 <div id="predictionText" class="pred-value">---</div>
 <div id="numberTips">NUM: -- | --</div>
 </div>
 
-<div id="investTip" class="investment">✅ MAINTAIN 4-6 LEVEL ✅</div>
-
-<p class="small-note">
-Predictions are estimates. Results are uncertain.
-High investment or recovery guarantees profit.
-</p>
-
-<a class="tg" href="https://t.me/+05qvEdy_Vn8xZGJl"
+<a class="tg"
+href="https://t.me/+05qvEdy_Vn8xZGJl"
 target="_blank" rel="noopener noreferrer">
 JOIN TELEGRAM
 </a>
 
 <table>
 <thead>
-<tr><th>PERIOD</th><th>PRED</th><th>NUM</th><th>RES</th></tr>
+<tr>
+<th>PERIOD</th>
+<th>PRED</th>
+<th>NUM</th>
+<th>RES</th>
+</tr>
 </thead>
 <tbody id="historyLogs"></tbody>
 </table>
@@ -204,8 +205,10 @@ document.getElementById("appView").classList.remove("hidden");
 
 function backToLanding(){
 if(pollTimer) clearInterval(pollTimer);
+
 pollTimer = null;
 lastPeriod = "";
+
 document.getElementById("appView").classList.add("hidden");
 document.getElementById("landingView").classList.remove("hidden");
 document.getElementById("loginView").classList.remove("hidden");
@@ -227,18 +230,25 @@ const response = await fetch(
 "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json",
 {cache:"no-store"}
 );
+
 if(!response.ok) throw new Error("Feed unavailable");
 
 const data = await response.json();
 const list = data?.data?.list;
-if(!Array.isArray(list) || !list.length) throw new Error("No data");
+
+if(!Array.isArray(list) || !list.length){
+throw new Error("No data");
+}
 
 const latest = list[0];
 const issue = String(latest.issueNumber);
 
 if(lastPeriod !== issue){
 
-if(lastPeriod !== "") updateHistory(latest);
+if(lastPeriod !== ""){
+updateHistory(latest);
+}
+
 lastPeriod = issue;
 
 const results = list.slice(0,12).map(x =>
@@ -268,18 +278,20 @@ const pool = currentPred === "BIG"
 pool.sort(() => Math.random() - 0.5);
 
 document.getElementById("predictionText").textContent = currentPred;
+
 document.getElementById("numberTips").textContent =
 "NUM: " + pool.slice(0,2).join(" | ");
 
 let nextIssue = issue;
-try{nextIssue = (BigInt(issue) + 1n).toString();}catch(e){}
+
+try{
+nextIssue = (BigInt(issue) + 1n).toString();
+}catch(e){}
 
 document.getElementById("periodDisplay").textContent =
 "NEXT PERIOD: " + nextIssue;
-
-document.getElementById("investTip").textContent =
-"Pattern estimate only — no guaranteed result";
 }
+
 }catch(error){
 document.getElementById("periodDisplay").textContent =
 "Feed unavailable — retrying...";
@@ -292,12 +304,14 @@ pollTimer = setInterval(poll,5000);
 
 function updateHistory(latest){
 const number = parseInt(latest.number,10);
+
 if(!Number.isFinite(number)) return;
 
 const actual = number >= 5 ? "BIG" : "SMALL";
 const won = actual === currentPred;
 
 const row = document.createElement("tr");
+
 [
 String(latest.issueNumber).slice(-3),
 currentPred,
@@ -314,7 +328,9 @@ row.lastChild.className = won ? "win" : "loss";
 const logs = document.getElementById("historyLogs");
 logs.insertBefore(row,logs.firstChild);
 
-while(logs.rows.length > 8) logs.deleteRow(8);
+while(logs.rows.length > 8){
+logs.deleteRow(8);
+}
 }
 </script>
 
