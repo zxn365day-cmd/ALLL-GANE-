@@ -1,98 +1,324 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: #f7f7f7; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-    .container { background-color: #ffffff; width: 100%; max-width: 420px; padding: 30px 20px; border-radius: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-    .badge { font-size: 11px; font-weight: 700; color: #b8860b; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 5px; }
-    .badge::before, .badge::after { content: ""; flex: 1; border-bottom: 1px solid #eee; }
-    .badge-text { padding: 0 10px; }
-    .profile-container { position: relative; width: 110px; height: 110px; margin: 0 auto 20px auto; }
-    .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-    .check-icon { position: absolute; bottom: 2px; right: 2px; background-color: #000; color: #fff; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; border: 2px solid #fff; }
-    .title { font-size: 24px; font-weight: 700; color: #111; margin-bottom: 8px; }
-    .members { color: #666; font-size: 15px; margin-bottom: 15px; }
-    .dot { color: #2e7d32; font-weight: bold; }
-    .bio { color: #555; font-size: 14px; margin-bottom: 25px; }
-    .divider { border: none; border-top: 1px solid #f0f0f0; margin: 20px 0; }
-    .features { display: flex; justify-content: center; gap: 15px; color: #666; font-size: 14px; margin-bottom: 25px; }
-    .dot-separator { color: #ccc; }
-    .btn-join { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background-color: #12151c; color: #ffffff; padding: 16px; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 16px; margin-bottom: 15px; }
-    .app-note { font-size: 13px; color: #888; margin-bottom: 12px; }
-    .recent-join { font-size: 13px; color: #333; font-weight: 500; }
-    .footer { font-size: 11px; color: #a0a0a0; margin-top: 30px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIM ZAYN VIP</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.hidden{display:none!important}
+
+/* FIRST PAGE */
+#landingView{
+min-height:100vh;background:#f7f7f7;display:flex;
+align-items:center;justify-content:center;padding:20px;color:#111
+}
+.container{
+width:100%;max-width:420px;background:#fff;padding:30px 20px;
+border-radius:20px;text-align:center;box-shadow:0 4px 15px #0000000d
+}
+.badge{font-size:11px;color:#b8860b;font-weight:bold;letter-spacing:1.5px;margin-bottom:25px}
+.profile{position:relative;width:110px;height:110px;margin:0 auto 20px}
+.profile img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.check{position:absolute;right:2px;bottom:2px;background:#000;color:white;border:2px solid white;border-radius:50%;padding:4px 7px}
+.title{font-size:24px;margin-bottom:8px}
+.members{color:#666;margin:15px 0}
+.bio{color:#555;font-size:14px;margin:20px 0}
+.divider{border:0;border-top:1px solid #eee;margin:20px 0}
+.features{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;color:#666;font-size:12px;margin:20px 0}
+.join,.continue{
+display:block;width:100%;padding:16px;border-radius:12px;
+text-decoration:none;font-weight:bold;border:0;margin:12px 0;cursor:pointer
+}
+.join{background:#12151c;color:#fff}
+.continue{background:linear-gradient(90deg,#ffea00,#ffaa00);color:#000}
+.note{font-size:13px;color:#888;margin:12px 0}
+.footer{font-size:11px;color:#999;margin-top:25px}
+
+/* VIP ENGINE */
+#appView{
+min-height:100vh;background:radial-gradient(circle,#1e2029,#050608);
+color:white;padding-bottom:30px;text-align:center
+}
+.header{padding:25px;border-bottom:1px solid #554900}
+.logo{font-size:27px;font-weight:900;letter-spacing:5px;color:#ffea00}
+.card{
+width:90%;max-width:400px;margin:20px auto;padding:25px;
+background:#ffffff08;border:1px solid #ffffff20;border-radius:25px
+}
+.activate{
+width:100%;padding:18px;border:0;border-radius:14px;
+background:linear-gradient(90deg,#ffea00,#ffaa00);
+font-size:16px;font-weight:900;cursor:pointer
+}
+.tg{
+display:block;margin:20px 0;padding:16px;border:2px solid #0088cc;
+border-radius:18px;color:white;text-decoration:none;background:#0088cc22
+}
+.prediction{margin:25px 0;padding:20px;background:#0005;border:1px solid #00ff8840;border-radius:20px}
+.pred-title{font-size:13px;color:#999;letter-spacing:2px}
+.pred-value{font-size:60px;font-weight:900;margin:12px 0}
+#numberTips{color:#00ff88;font-weight:bold;letter-spacing:2px}
+.investment{margin-top:15px;padding:12px;background:#ffea0015;color:#ffea00;border-radius:10px}
+table{width:100%;margin-top:25px;border-collapse:collapse;font-size:12px}
+th,td{padding:12px 4px;border-bottom:1px solid #ffffff15}
+th{color:#888}
+.win{color:#00ff88}.loss{color:#ff3366}
+.small-note{font-size:11px;color:#aaa;line-height:1.5;margin-top:15px}
+.back{margin-top:20px}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <div class="badge"><span class="badge-text">✔ VERIFIED CHANNEL</span></div>
-    
-    <div class="profile-container">
-      <img src="https://i.ibb.co/N6fvX2pC/IMG-9364.jpg" alt="Profile" class="profile-img">
-      <div class="check-icon">✓</div>
-    </div>
+<!-- FIRST PAGE -->
+<section id="landingView">
+<div class="container">
 
-    <h1 class="title">KIM ZAYN 📊</h1>
-    
-    <p class="members">
-      <span class="dot">•</span> <span id="member-count">Loading...</span> members
-    </p>
+<div class="badge">✔ CHANNEL INFORMATION</div>
 
-    <p class="bio">i lost my 20k TELEGRAM FAMILY 👥😢</p>
+<div class="profile">
+<img src="https://i.ibb.co/N6fvX2pC/IMG-9364.jpg" alt="KIM ZAYN">
+<div class="check">✓</div>
+</div>
 
-    <hr class="divider">
+<h1 class="title">KIM ZAYN 📊</h1>
 
-    <div class="features">
-      <span>Free to join</span>
-      <span class="dot-separator">•</span>
-      <span>Instant access</span>
-      <span class="dot-separator">•</span>
-      <span>Private</span>
-    </div>
+<p class="members">
+<span style="color:green">●</span>
+<span id="member-count">Channel</span>
+</p>
 
-    <!-- Updated Join Link -->
-    <a href="https://t.me/+05qvEdy_Vn8xZGJl" class="btn-join">
-      Join Channel <span>▶</span>
-    </a>
+<p class="bio">i lost my 20k TELEGRAM FAMILY 👥😢</p>
 
-    <p class="app-note">Opens in the Telegram app</p>
-    <p class="recent-join"><strong>201</strong> people joined in the last 24 hours</p>
+<hr class="divider">
 
-    <hr class="divider">
+<div class="features">
+<span>Free to join</span> •
+<span>Instant access</span> •
+<span>Private</span>
+</div>
 
-    <div class="footer">
-      © 2026 KIM ZAYN 📊 • Not affiliated with Telegram
-    </div>
-  </div>
+<a class="join"
+href="https://t.me/+05qvEdy_Vn8xZGJl"
+target="_blank" rel="noopener noreferrer">
+Join Channel ▶
+</a>
 
-  <script>
-    const BOT_TOKEN = "8447506161:AAEPMruL5fgW7gDxDfKhnrBhcOZuxCeE46s";
-    const CHANNEL_USERNAME = "@KIM_ZAYNBOSS";
+<p class="note">Opens in the Telegram app</p>
 
-    async function getRealTelegramMembers() {
-      try {
-        const url = `https://api.telegram.org/bot${BOT_TOKEN}/getChatMemberCount?chat_id=${CHANNEL_USERNAME}`;
-        const response = await fetch(url);
-        const data = await response.json();
+<hr class="divider">
 
-        if (data.ok) {
-          document.getElementById('member-count').innerText = data.result.toLocaleString();
-        } else {
-          document.getElementById('member-count').innerText = "Live";
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        document.getElementById('member-count').innerText = "Live";
-      }
-    }
+<button class="continue" onclick="openEngine()">
+OPEN VIP PREDICTION ENGINE
+</button>
 
-    getRealTelegramMembers();
-  </script>
+<div class="footer">
+© 2026 KIM ZAYN 📊 • Not affiliated with Telegram
+</div>
+
+</div>
+</section>
+
+<!-- SECOND PAGE -->
+<section id="appView" class="hidden">
+
+<div class="header">
+<div class="logo">KIM VIP V3</div>
+</div>
+
+<div id="loginView" class="card">
+
+<p style="color:#ffea00;font-weight:bold;margin-bottom:12px">
+PREMIUM CLOUD ACCESS
+</p>
+
+<p style="color:#999;font-size:13px;margin-bottom:22px">
+Connect to the WinGo history feed.
+</p>
+
+<button class="activate" onclick="handleLogin()">
+ACTIVATE ENGINE
+</button>
+
+<a class="tg" href="https://t.me/+05qvEdy_Vn8xZGJl"
+target="_blank" rel="noopener noreferrer">
+TELEGRAM VIP — JOIN CHANNEL
+</a>
+
+</div>
+
+<div id="predictionView" class="card hidden">
+
+<div style="color:#00ff88;font-size:12px">
+● HISTORY FEED STATUS
+</div>
+
+<div id="periodDisplay" style="margin-top:15px;color:#aaa">
+WAITING FOR DATA...
+</div>
+
+<div class="prediction">
+<div class="pred-title">PATTERN ESTIMATE</div>
+<div id="predictionText" class="pred-value">---</div>
+<div id="numberTips">NUM: -- | --</div>
+</div>
+
+<div id="investTip" class="investment">
+No guaranteed prediction
+</div>
+
+<p class="small-note">
+Predictions are estimates only. Results are uncertain.
+No investment or recovery strategy guarantees profit.
+</p>
+
+<a class="tg" href="https://t.me/+05qvEdy_Vn8xZGJl"
+target="_blank" rel="noopener noreferrer">
+JOIN TELEGRAM
+</a>
+
+<table>
+<thead>
+<tr><th>PERIOD</th><th>PRED</th><th>NUM</th><th>RES</th></tr>
+</thead>
+<tbody id="historyLogs"></tbody>
+</table>
+
+<button class="activate back" onclick="backToLanding()">
+BACK TO FIRST PAGE
+</button>
+
+</div>
+</section>
+
+<script>
+let lastPeriod = "";
+let currentPred = "";
+let pollTimer = null;
+
+function openEngine(){
+document.getElementById("landingView").classList.add("hidden");
+document.getElementById("appView").classList.remove("hidden");
+}
+
+function backToLanding(){
+if(pollTimer) clearInterval(pollTimer);
+pollTimer = null;
+lastPeriod = "";
+document.getElementById("appView").classList.add("hidden");
+document.getElementById("landingView").classList.remove("hidden");
+document.getElementById("loginView").classList.remove("hidden");
+document.getElementById("predictionView").classList.add("hidden");
+}
+
+function handleLogin(){
+document.getElementById("loginView").classList.add("hidden");
+document.getElementById("predictionView").classList.remove("hidden");
+startEngine();
+}
+
+async function startEngine(){
+if(pollTimer) clearInterval(pollTimer);
+
+async function poll(){
+try{
+const response = await fetch(
+"https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json",
+{cache:"no-store"}
+);
+if(!response.ok) throw new Error("Feed unavailable");
+
+const data = await response.json();
+const list = data?.data?.list;
+if(!Array.isArray(list) || !list.length) throw new Error("No data");
+
+const latest = list[0];
+const issue = String(latest.issueNumber);
+
+if(lastPeriod !== issue){
+
+if(lastPeriod !== "") updateHistory(latest);
+lastPeriod = issue;
+
+const results = list.slice(0,12).map(x =>
+parseInt(x.number,10) >= 5 ? "BIG" : "SMALL"
+);
+
+const dragon = results.length >= 3 &&
+results[0] === results[1] &&
+results[1] === results[2];
+
+const mirror = results.length >= 3 &&
+results[0] !== results[1] &&
+results[1] !== results[2];
+
+if(dragon){
+currentPred = results[0];
+}else if(mirror){
+currentPred = results[0] === "BIG" ? "SMALL" : "BIG";
+}else{
+const bigCount = results.filter(x => x === "BIG").length;
+currentPred = bigCount > 6 ? "SMALL" : "BIG";
+}
+
+const pool = currentPred === "BIG"
+? [6,7,8,9] : [1,2,3,4];
+
+pool.sort(() => Math.random() - 0.5);
+
+document.getElementById("predictionText").textContent = currentPred;
+document.getElementById("numberTips").textContent =
+"NUM: " + pool.slice(0,2).join(" | ");
+
+let nextIssue = issue;
+try{nextIssue = (BigInt(issue) + 1n).toString();}catch(e){}
+
+document.getElementById("periodDisplay").textContent =
+"NEXT PERIOD: " + nextIssue;
+
+document.getElementById("investTip").textContent =
+"Pattern estimate only — no guaranteed result";
+}
+}catch(error){
+document.getElementById("periodDisplay").textContent =
+"Feed unavailable — retrying...";
+}
+}
+
+await poll();
+pollTimer = setInterval(poll,5000);
+}
+
+function updateHistory(latest){
+const number = parseInt(latest.number,10);
+if(!Number.isFinite(number)) return;
+
+const actual = number >= 5 ? "BIG" : "SMALL";
+const won = actual === currentPred;
+
+const row = document.createElement("tr");
+[
+String(latest.issueNumber).slice(-3),
+currentPred,
+String(number),
+won ? "WIN" : "LOSS"
+].forEach(value=>{
+const cell = document.createElement("td");
+cell.textContent = value;
+row.appendChild(cell);
+});
+
+row.lastChild.className = won ? "win" : "loss";
+
+const logs = document.getElementById("historyLogs");
+logs.insertBefore(row,logs.firstChild);
+
+while(logs.rows.length > 8) logs.deleteRow(8);
+}
+</script>
 
 </body>
 </html>
